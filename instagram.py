@@ -87,9 +87,13 @@ class Instagram:
         while contador < 5:
             for i in comments_list_copy:
                 i = random.choice(comments_list_copy)
-                self.__driver.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/textarea').send_keys(f'@{i}')
+                self.__driver.refresh()
+                sleep(2)
+                self.__driver.find_element_by_xpath('/html/body/div[1]/section/main/div/div[1]/article/div/div[2]/div/div[2]/section[1]/span[2]/button').click()
+                self.__driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div[1]/article/div/div[2]/div/div[2]/section[3]/div/form/textarea').send_keys(f'@{i}')
                 sleep(3)
-                self.__driver.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/button[2]').click() 
+                self.__driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div[1]/article/div/div[2]/div/div[2]/section[3]/div/form/button[2]').click() 
                 sleep(20)
+                
             contador + 1
             
