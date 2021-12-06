@@ -1,6 +1,8 @@
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from time import sleep
-from random import choice, randrange
+import random
 
 
 class Instagram:
@@ -33,22 +35,26 @@ class Instagram:
         self.__driver.find_element_by_name(
             self.__input_user_password).send_keys(password)
         self.__driver.find_element_by_xpath(self.__btn_login).click()
-        sleep(2)
-    
+        sleep(5)
+        #Fecha o 1º pop-up depois do login realizado.
+        self.__driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div/div/div/button').click()
+        sleep(6)
+        #Fecha o 2º pop-up depois do login realizado.
+        self.__driver.find_element_by_css_selector('body > div.RnEpo.Yx5HN > div > div > div > div.mt3GC > button.aOOlW.HoLwm').click()
+        sleep(3)
+        self.__driver.find_element_by_xpath('//*[@id="react-root"]/section/nav/div[2]/div/div/div[2]/div[1]/div').click()
+        sleep(3)
+        self.__driver.find_element_by_css_selector('#react-root > section > nav > div._8MQSO.Cx7Bp > div > div > div.QY4Ed > input').send_keys('rickellmyc' + Keys.ENTER)
+        sleep(3)
+        self.__driver.find_element_by_xpath('//*[@id="react-root"]/section/nav/div[2]/div/div/div[2]/div[3]/div/div[2]/div/div[1]/a/div').click()
+        sleep(6)
+        self.__driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div[2]/article/div/div/div[1]/div[1]/a/div[1]/div[2]').click()
+        sleep(5)
     def navigate_to_post(self):
         self.__driver.get(self.__url_intagram_post)
         sleep(2)
 
-    def __choice_users_name_post(self, comments_list, user_number_per_comment):
-        comments_list = comments_list
-        comments = []
-        while len(comments) < user_number_per_comment:
-            commnet = choice(comments_list)
-            comments.append(f'@{commnet}'.strip())
-            comments_list.remove(commnet)
-        return comments
-
-    def comment(self, comments_list, user_number_per_comment, comment_number=1):
+    '''def comment(self, comments_list, user_number_per_comment, comment_number=1):
         print("Comment")
         comments_list_copy = comments_list [:]
 
@@ -58,6 +64,7 @@ class Instagram:
                 comments_list_copy = comments_list[:]
             choiceusers_name_post = self.__choice_users_name_post(
                 comments_list_copy, user_number_per_comment)
+            
             self.__driver.find_element_by_class_name(
                 self.__input_comment).click()
             for element in choiceusers_name_post:
@@ -70,4 +77,19 @@ class Instagram:
             print(f'Comentario de numero {i+1} => {choiceusers_name_post}')
             sleep(8)
             self.__driver.refresh()
-            sleep(60+randrange(0, 9))
+            sleep(60+randrange(0, 9))'''
+
+    def comment(self, comments_list, user_number_per_comment=False, comment_number=False):
+        comments_list_copy = comments_list [:]
+        self.__driver.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/textarea').click()
+        
+        contador = 0
+        while contador < 5:
+            for i in comments_list_copy:
+                i = random.choice(comments_list_copy)
+                self.__driver.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/textarea').send_keys(f'@{i}')
+                sleep(3)
+                self.__driver.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/button[2]').click() 
+                sleep(20)
+            contador + 1
+            

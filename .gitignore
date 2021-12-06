@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# created by virtualenv automatically
+*
+
+
 # C extensions
 *.so
 *.key

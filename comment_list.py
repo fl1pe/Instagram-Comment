@@ -42,7 +42,10 @@ COMMENT_LIST = [
     "ladyqueiroz_clayton",
     "wbs.brazil.kids",
     "j_n_l_r",
-    "farm_alice",
+    "farm_alice"]
+    
+    
+''''
     "americanimport_carloshenrique",
     "diamisonhair",
     "emperor_jagaban",
@@ -767,5 +770,5 @@ COMMENT_LIST = [
     "dragabriandrade",
     "rafalouiz",
     "giselefranca_makeup"
-]
-
+    
+'''
